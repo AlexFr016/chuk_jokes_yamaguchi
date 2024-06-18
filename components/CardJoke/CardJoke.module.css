@@ -1,0 +1,22 @@
+.card {
+	display: flex;
+	flex: 1 1 calc(33.333% - 1rem);
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	padding: 1rem;
+	transition: transform 0.2s;
+	min-width: 250px;
+	min-height: 200px;
+	justify-content: space-between;
+	flex-direction: column;
+}
+
+.card:hover {
+	transform: translateY(-5px);
+}
+
+.footer_container {
+	display: flex;
+	justify-content: space-between;
+}
