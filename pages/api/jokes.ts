@@ -1,9 +1,12 @@
 import { getJokesFromSearch } from '@/services/joke.service'
+import { SearchJokes } from '@/types/joke'
+import { AxiosResponse } from 'axios'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 type ResponseData = {
 	message?: string
 	error?: string
+	data?: SearchJokes
 }
 
 export default async function handler(
@@ -18,11 +21,10 @@ export default async function handler(
 			.json({ error: 'Query parameter is required and should be a string' })
 	}
 
-	getJokesFromSearch(query)
-		.then(result => {
-			res.status(200).json(result)
-		})
-		.catch(error => {
-			res.status(500).json({ error: 'Failed to fetch jokes' })
-		})
+	try {
+		const response: AxiosResponse<SearchJokes> = await getJokesFromSearch(query)
+		res.status(200).json({ data: response.data })
+	} catch (error) {
+		res.status(500).json({ error: 'Failed to fetch jokes' })
+	}
 }
