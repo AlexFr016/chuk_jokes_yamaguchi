@@ -33,7 +33,9 @@ export const ListJokes = ({ query, className, ...props }: IListJokesProps) => {
 
 	return (
 		<>
-			{data && count > 0 && <span>Total count: {count}</span>}
+			{data && count > 0 && (
+				<span className={styles.total}>Total count: {count}</span>
+			)}
 
 			<div className={cn(className, styles.list)}>
 				{data && data?.total > 0 ? (

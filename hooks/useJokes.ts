@@ -20,8 +20,8 @@ export const useJokesFromQuery = (query: string) => {
 					// т.к. апишка чака не работает используем моковые данные и делаем поиск по ним
 					notify()
 
-					const filteredJokes = mockSearchJokes.result.filter(joke =>
-						joke.value.toLowerCase().includes(query)
+					let filteredJokes = mockSearchJokes.result.filter(joke =>
+						joke.value.toLowerCase().includes(query.toLowerCase())
 					)
 
 					return {
