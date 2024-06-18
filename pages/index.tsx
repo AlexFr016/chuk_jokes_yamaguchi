@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { Open_Sans } from 'next/font/google'
 import Head from 'next/head'
 
@@ -18,7 +18,7 @@ export default function Home() {
 	)
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
 	return {
 		redirect: {
 			destination: '/search',

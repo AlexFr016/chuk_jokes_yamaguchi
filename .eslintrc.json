@@ -1,7 +1,7 @@
 {
 	"extends": "next/core-web-vitals",
 	"rules": {
-		"comma-dangle": ["warn", "never"],
+		// "comma-dangle": ["warn", "never"],
 		"quotes": ["error", "single"],
 		"indent": ["error", "tab"]
 	}
