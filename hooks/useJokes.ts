@@ -14,7 +14,7 @@ export const useJokesFromQuery = (query: string) => {
 		queryFn: async () => {
 			try {
 				const response = await axiosClient.get<{ data: SearchJokes }>(
-					`/jokes?query=${query}`
+					`/api/jokes?query=${query}`
 				)
 				return response.data.data
 			} catch (error) {
