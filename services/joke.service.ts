@@ -1,6 +1,6 @@
 import { API } from '@/pages/api/api'
 import axios from 'axios'
-import { SearchJokes } from '../types/joke'
+import { Categories, Category, Joke, SearchJokes } from '../types/joke'
 
 export async function getJokesFromSearch(query: string) {
 	return await axios<SearchJokes>(
@@ -8,16 +8,16 @@ export async function getJokesFromSearch(query: string) {
 	)
 }
 
-// export async function getRandomJoke() {
-// 	return await axios<Joke>('https://api.chucknorris.io/jokes/random')
-// }
+export async function getRandomJoke() {
+	return await axios<Joke>(API.jokes.getRandomJoke)
+}
 
-// export async function getRandomJokeWithCategory(category: Category) {
-// 	return await axios<Joke>(
-// 		`https://api.chucknorris.io/jokes/random?category=${category}`
-// 	)
-// }
+export async function getRandomJokeWithCategory(category: Category) {
+	return await axios<Joke>(
+		`${API.jokes.getRandomJokeWithCategory}?category=${category}`
+	)
+}
 
-// export async function getCategoriesJoke() {
-// 	return await axios<Categories>('https://api.chucknorris.io/jokes/categories')
-// }
+export async function getCategoriesJoke() {
+	return await axios<Categories>(API.jokes.getCategoriesJoke)
+}
