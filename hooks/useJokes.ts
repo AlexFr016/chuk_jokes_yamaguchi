@@ -1,7 +1,7 @@
 import { mockSearchJokes } from '@/pages/api/mockJokes'
+import { axiosClient } from '@/pages/search'
 import { SearchJokes } from '@/types/joke'
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 import { toast } from 'react-toastify'
 
 export const useJokesFromQuery = (query: string) => {
@@ -13,8 +13,8 @@ export const useJokesFromQuery = (query: string) => {
 		queryKey: ['jokes', query],
 		queryFn: async () => {
 			try {
-				const response = await axios.get<{ data: SearchJokes }>(
-					`/api/jokes?query=${query}`
+				const response = await axiosClient.get<{ data: SearchJokes }>(
+					`/jokes?query=${query}`
 				)
 				return response.data.data
 			} catch (error) {
