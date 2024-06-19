@@ -12,25 +12,24 @@ export const useJokesFromQuery = (query: string) => {
 	return useQuery<SearchJokes, Error>({
 		queryKey: ['jokes', query],
 		queryFn: async () => {
-			const response = await axios<SearchJokes>(`/api/jokes?query=${query}`)
-				.then(res => {
-					return res.data
-				})
-				.catch(err => {
-					// т.к. апишка чака не работает используем моковые данные и делаем поиск по ним
-					notify()
+			try {
+				const response = await axios.get<{ data: SearchJokes }>(
+					`/api/jokes?query=${query}`
+				)
+				return response.data.data
+			} catch (error) {
+				notify()
 
-					let filteredJokes = mockSearchJokes.result.filter(joke =>
-						joke.value.toLowerCase().includes(query.toLowerCase())
-					)
+				// т.к. апишка чака не работает используем моковые данные и делаем поиск по ним
+				const filteredJokes = mockSearchJokes.result.filter(joke =>
+					joke.value.toLowerCase().includes(query.toLowerCase())
+				)
 
-					return {
-						result: filteredJokes,
-						total: filteredJokes.length,
-					}
-				})
-
-			return response
+				return {
+					result: filteredJokes,
+					total: filteredJokes.length,
+				}
+			}
 		},
 		enabled: query.length >= 4,
 		staleTime: 5 * 60 * 1000,
